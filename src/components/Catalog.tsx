@@ -1,9 +1,10 @@
-import { FC, useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+
 import api from "../services/api";
 import { IProduct } from "../store/modules/cart/types";
+import { CatalogItem } from "./CatalogItem";
 
-const Catalog: FC = () => {
+const Catalog: React.FC = () => {
 	const [catalog, setCatalog] = useState<IProduct[]>([]);
 
 	useEffect(() => {
@@ -17,13 +18,7 @@ const Catalog: FC = () => {
 			<h1>Catalog</h1>
 
 			{catalog.map((product) => {
-				return (
-					<article key={product.id}>
-						<strong>{product.title}</strong> {"  -  "}
-						<span>{product.price}</span> {"   "}
-						<button type="button">Comprar</button>
-					</article>
-				);
+				return <CatalogItem key={product.id} product={product} />;
 			})}
 		</main>
 	);
